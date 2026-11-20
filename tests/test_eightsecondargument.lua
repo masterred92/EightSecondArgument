@@ -52,6 +52,7 @@ S.glow(LANCE, false)
 check(EA.verdict == "ready", "alert seen, but the target's freeze is hidden: no BLAST while standing")
 W.moving = true; W.fire("PLAYER_STARTED_MOVING")
 check(EA.verdict == "blast" and row.headText == "BLAST" and row.lineText[2] == "Frozen target hidden", "moving + no Fingers: BLAST")
+check(row.h == 78 and row.lines[2].shown and 44 + 14 * 2 + 6 <= row.h, "r4: line 2 (Frozen target hidden) fits inside the box")
 W.moving = false; W.fire("PLAYER_STOPPED_MOVING")
 -- 3. Never-secret Fingers and readable target freeze (restrictions off): full verdicts.
 reset(); S.restrictions = false; W.target = "mob"; fight()
