@@ -2,7 +2,7 @@
 ## Title: Eight Second Argument
 ## Notes: Frost Mage verdict for Ice Lance and Fire Blast's shared 8-second cooldown: LANCE, BLAST or WAIT, from your own casts. Part of the Frost Suite; works alone. Blizzard textures only.
 ## Author: Kenny
-## Version: 1.0.0
+## Version: 1.0.1
 ## SavedVariables: KennyEightSecondArgumentDB
 ## X-License: MIT
 ## IconTexture: Interface\Icons\Spell_Frost_FrostBlast
