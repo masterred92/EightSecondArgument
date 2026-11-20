@@ -33,6 +33,8 @@ EA.BLAST = { [2136] = 8, [2137] = 8, [2138] = 8, [8412] = 8, [8413] = 8, [10197]
   [400616] = 15, [400618] = 15, [400619] = 15, [400620] = 15, [400621] = 15, [400622] = 15, [400623] = 15 }
 EA.FINGERS = { 400669, 400670 }
 EA.FROZEN = { 122, 865, 6131, 10230, 12494 } -- Frost Nova ranks, Frostbite's freeze
+-- Trainer levels: SpellLevels.BaseLevel, build 1.60.1.71037 (Fire Blast 2136 = 6, Ice Lance 1312002 = 20).
+EA.NEEDS = { { name = L["Fire Blast"], level = 6, spells = EA.BLAST }, { name = L["Ice Lance"], level = 20, spells = EA.LANCE } }
 EA.TICK = 0.25
 
 local db, row
@@ -124,13 +126,16 @@ function EA.Update()
   EA.EvaluateModes()
   EA.verdict = EA.Compute()
   if row then EA.Paint() end
-  if EA.Left() > 0 or C.InCombat() then schedule() end
+  if EA.known and (EA.Left() > 0 or C.InCombat()) then schedule() end
   return EA.verdict
 end
 
 function EA.Paint()
   local v = EA.verdict
-  if v == "hidden" then FS.State(KEY, "hidden"); return end
+  if v == "hidden" then
+    if EA.need then FS.NotYet(KEY, EA.need) else FS.State(KEY, "hidden") end
+    return
+  end
   FS.ClearLines(KEY)
   local left = EA.Left()
   local fingersHidden = EA.modes.fingers == "none" or (EA.modes.fingers == "alert" and not (db and db.alertSeen))
@@ -215,7 +220,9 @@ ev:RegisterUnitEvent("UNIT_AURA", "player", "target")
 
 local function refresh()
   if not C.InCombat() then
-    EA.known = FS.IsMage() and FS.KnowsAny(EA.LANCE) ~= false and FS.KnowsAny(EA.BLAST) ~= false
+    EA.need = FS.IsMage() and FS.Missing(EA.NEEDS) or nil
+    EA.known = FS.IsMage() and EA.need == nil
+    if EA.known then FS.Learned(KEY) end
   end
   EA.Update()
 end
@@ -233,7 +240,8 @@ ev:SetScript("OnEvent", function(_, event, ...)
     if ... ~= ADDON then return end
     db = Core.Migrate(KennyEightSecondArgumentDB, migrations, SCHEMA)
     KennyEightSecondArgumentDB = db
-    row = FS.Register(KEY, db, { title = L["Eight Second Argument"], slash = EA.Slash, help = "debug", debug = Core.PrintDebug })
+    row = FS.Register(KEY, db, { title = L["Eight Second Argument"], slash = EA.Slash, help = "debug", debug = Core.PrintDebug,
+      refresh = refresh })
     Core.SafeCall("refresh", refresh)
     return
   end

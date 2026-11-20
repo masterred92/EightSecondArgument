@@ -29,6 +29,12 @@ box waits 15.
 
 No alert doesn't count as "no Fingers" until this character has seen the game's Ice Lance alert at least once.
 
+## Low-level Mages
+
+Until you have Fire Blast (level 6) and Ice Lance (level 20), the box shows one calm line, like `Learn Fire Blast at level 6`, and a small
+**Hide until I learn** button. In combat the line steps aside. The button hides the box on that character only, and the box comes back by
+itself when you learn what it needs. Other classes never see it.
+
 ## Commands
 
 The Frost Suite has no per-addon slash commands, only `/frost <sub>`. That keeps the risk of clashing with other addons low.

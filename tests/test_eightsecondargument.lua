@@ -75,7 +75,7 @@ check(EA.verdict == "none" and row.statusText == "can't see your casts here" and
 check(W.printed("can't time the shared cooldown"), "chat says so once")
 -- 6. Needs both spells; other units ignored; TEXT style never glows.
 reset(); W.known = { [2136] = true }; W.fire("SPELLS_CHANGED")
-check(row.state == "hidden", "Fire Blast without Ice Lance: hidden")
+check(row.state == "learn" and row.learnText.text_ == "Learn Ice Lance from your trainer", "Fire Blast without Ice Lance: says to learn it (r5)")
 W.known = nil; W.fire("SPELLS_CHANGED")
 S.cast(LANCE, "party1")
 check(EA.readyAt == nil, "other units ignored")
