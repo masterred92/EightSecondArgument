@@ -1,6 +1,6 @@
 # Eight Second Argument
 
-A tiny Frost Mage box for **WoW: Forever** (Interface 16001). Part of Kenny's Frost Suite, and it works alone.
+A tiny Frost Mage box for **WoW: Forever** (Interface 16001). Version 1.0.0. Part of Kenny's Frost Suite, and it works alone.
 
 Official Nov 2, 2026 notes gave Ice Lance **an 8-second cooldown shared with Fire Blast**. The game's own data agrees: every
 Ice Lance rank and Fire Blast ranks 1-7 share one cooldown category at 8 seconds. Pressing Fire Blast while Ice Lance would
