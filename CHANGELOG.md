@@ -4,6 +4,7 @@
 
 - Layout fixes (FrostSuite-1.0 r4, shared by the suite): a status too long to sit beside the title moves to its own line instead of running into it, and box heights fit their text.
 - Box is 78 px in combat, so the `Frozen target hidden` line sits inside it.
+- Low-level Mages (FrostSuite-1.0 r5, shared by the suite): until you have Fire Blast and Ice Lance the box shows one calm line, e.g. `Learn Fire Blast at level 6`, with a small **Hide until I learn** button (saved per character). It steps aside in combat and comes back by itself as soon as you learn them (checked when you learn a spell, level up, change talents or leave combat). The timer only runs once both are known.
 
 ## 1.0.0 (Nov 20, 2026)
 
